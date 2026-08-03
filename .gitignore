@@ -1,0 +1,25 @@
+# Go
+gatus
+/vendor
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+
+# Secrets / env
+.env
+*.pem
+*.key
+
+# IDE / OS
+.idea
+.vscode
+*.iml
+.DS_Store
