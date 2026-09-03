@@ -27,7 +27,7 @@ resource "aws_route53_record" "app_cert_validation" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = data.aws_route53_zone.example.zone_id
+  zone_id         = data.aws_route53_zone.route53_zone.zone_id
 }
 # Wait for DNS validation to complete
 resource "aws_acm_certificate_validation" "app_cert" {
