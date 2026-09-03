@@ -1,5 +1,5 @@
 # Look up existing route 53 hosted zone
-data"aws_route53_zone" "route53_zone" {
+data "aws_route53_zone" "route53_zone" {
   name         = var.route53_zone_name
   private_zone = false
 }
@@ -13,8 +13,8 @@ resource "aws_acm_certificate" "app-cert" {
     create_before_destroy = true
   }
 }
- # Create DNS validation records
- resource "aws_route53_record" "app_cert_validation" {
+# Create DNS validation records
+resource "aws_route53_record" "app_cert_validation" {
   for_each = {
     for dvo in aws_acm_certificate.app-cert.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
@@ -22,7 +22,7 @@ resource "aws_acm_certificate" "app-cert" {
       type   = dvo.resource_record_type
     }
   }
-allow_overwrite = true
+  allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]
   ttl             = 60

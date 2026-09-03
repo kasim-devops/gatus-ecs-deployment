@@ -32,7 +32,7 @@ resource "aws_subnet" "Private" {
 }
 
 # Internet Gateway
-  resource "aws_internet_gateway" "gatus-ig" {
+resource "aws_internet_gateway" "gatus-ig" {
   vpc_id = aws_vpc.gatus-deployment-vpc.id
 
   tags = {
@@ -65,35 +65,35 @@ resource "aws_route_table" "gatus-public-rt" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gatus-ig.id
-    }
-    tags = {
-      Name = "PublicRoute"
+  }
+  tags = {
+    Name = "PublicRoute"
   }
 }
 
-  # Private Route Table
-  resource "aws_route_table" "gatus-private-rt" {
-    vpc_id = aws_vpc.gatus-deployment-vpc.id
+# Private Route Table
+resource "aws_route_table" "gatus-private-rt" {
+  vpc_id = aws_vpc.gatus-deployment-vpc.id
 
-    route {
-      cidr_block = "0.0.0.0/0"
-      nat_gateway_id = aws_nat_gateway.gatus-natgw.id
-      }
-      tags = {
-        Name = "PrivateRoute"
-    }
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.gatus-natgw.id
   }
+  tags = {
+    Name = "PrivateRoute"
+  }
+}
 
-  # Route Table Associations
-  # Public Route Table Associations
-  resource "aws_route_table_association" "gatus-public-rt" {
-    count         = length(var.public_subnet_cidrs)
+# Route Table Associations
+# Public Route Table Associations
+resource "aws_route_table_association" "gatus-public-rt" {
+  count          = length(var.public_subnet_cidrs)
   subnet_id      = aws_subnet.Public[count.index].id
   route_table_id = aws_route_table.gatus-public-rt.id
 }
 # Private Route Table Associations
 resource "aws_route_table_association" "gatus-private-rt" {
-  count         = length(var.private_subnet_cidrs)
+  count          = length(var.private_subnet_cidrs)
   subnet_id      = aws_subnet.Private[count.index].id
   route_table_id = aws_route_table.gatus-private-rt.id
 }
