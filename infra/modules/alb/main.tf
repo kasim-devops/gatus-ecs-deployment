@@ -1,3 +1,20 @@
+data "aws_route53_zone" "route53_zone" {
+  name         = var.route53_zone_name
+  private_zone = false
+}
+
+resource "aws_route53_record" "app" {
+  zone_id = data.aws_route53_zone.route53_zone.zone_id
+  name    = var.app_domain_name
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.gatus-alb.dns_name
+    zone_id                = aws_lb.gatus-alb.zone_id
+    evaluate_target_health = true
+  }
+}
+
 resource "aws_lb" "gatus-alb" {
   name               = "gatus-alb"
   internal           = false

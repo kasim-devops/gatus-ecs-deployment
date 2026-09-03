@@ -17,3 +17,13 @@ variable "certificate_arn" {
   type        = string
   description = "The ARN of the ACM certificate for HTTPS."
 }
+
+variable "route53_zone_name" {
+  type        = string
+  description = "The name of the Route 53 hosted zone."
+}
+
+variable "app_domain_name" {
+  type        = string
+  description = "The Full domain name the ALB should be reachable at."
+}
