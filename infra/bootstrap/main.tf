@@ -102,7 +102,7 @@ resource "aws_iam_role_policy" "s3_state" {
   })
 }
 
-# --- IAM: narrowly scoped to the ECS task execution role only (avoids iam:* + PassRole:* privilege escalation risk) ---
+# --- IAM: scoped to the ECS task execution role only
 resource "aws_iam_role_policy" "iam_for_ecs_role" {
   name = "iam-ecs-role-management"
   role = aws_iam_role.github_actions_role.id
