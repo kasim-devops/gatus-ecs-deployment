@@ -121,7 +121,9 @@ resource "aws_iam_role_policy" "iam_for_ecs_role" {
           "iam:PassRole",
           "iam:AttachRolePolicy",
           "iam:DetachRolePolicy",
-          "iam:TagRole"
+          "iam:TagRole",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies"
         ]
         Resource = "arn:aws:iam::${var.aws_account_id}:role/gatus-ecs-execution-role"
       }
