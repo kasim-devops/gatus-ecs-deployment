@@ -1,9 +1,13 @@
-name: Build and Push
 on:
   push:
     branches:
       - main
+    paths:
+      - 'app/**'
+      - 'Dockerfile'
+      - '.github/workflows/build.yaml'
   workflow_dispatch:
+
 permissions:
   id-token: write
   contents: read

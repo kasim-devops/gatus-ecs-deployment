@@ -92,7 +92,7 @@ resource "aws_iam_role_policy" "s3_state" {
         Action = [
           "s3:GetObject",
           "s3:PutObject",
-          "s3:DeleteObject",
+          "s3:DeleteObject"
         ]
         Resource = [
           "arn:aws:s3:::gatus-deployment-bucket/gatus-ecs/terraform.tfstate",
@@ -123,7 +123,8 @@ resource "aws_iam_role_policy" "iam_for_ecs_role" {
           "iam:DetachRolePolicy",
           "iam:TagRole",
           "iam:ListRolePolicies",
-          "iam:ListAttachedRolePolicies"
+          "iam:ListAttachedRolePolicies",
+          "iam:ListInstanceProfilesForRole"
         ]
         Resource = "arn:aws:iam::${var.aws_account_id}:role/gatus-ecs-execution-role"
       }
