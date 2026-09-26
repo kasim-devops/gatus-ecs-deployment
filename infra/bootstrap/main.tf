@@ -91,7 +91,8 @@ resource "aws_iam_role_policy" "s3_state" {
         Effect = "Allow"
         Action = [
           "s3:GetObject",
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:DeleteObject",
         ]
         Resource = [
           "arn:aws:s3:::gatus-deployment-bucket/gatus-ecs/terraform.tfstate",
