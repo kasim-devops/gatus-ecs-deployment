@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "github_actions_trust" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:kasim-devops/gatus-ecs-deployment:ref:refs/heads/main"]
+      values   = ["repo:kasim-devops@253726093/gatus-ecs-deployment@1322173500:ref:refs/heads/main"]
     }
   }
 }
